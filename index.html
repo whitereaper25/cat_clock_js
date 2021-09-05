@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock With Date</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body onload="initClock()">
+    <div class="datetime">
+      <div class="date">
+        <span id="dayname">Day</span>,
+        <span id="month">Month</span>
+        <span id="daynum">00</span>,
+        <span id="year">Year</span>
+      </div>
+      <div class="time">
+        <span id="hour">00</span>:
+        <span id="minutes">00</span>:
+        <span id="seconds">00</span>
+        <span id="period">AM</span>
+      </div>
+    </div>
+      <div class="cat_image">
+        <img id="edit_cat" src ="https://th.bing.com/th/id/R.0257f5ea7699de502ffaa76e5017b3fd?rik=BYszrFPUqPOmWw&riu=http%3a%2f%2fwww.goodmorningwishes.org%2fwp-content%2fuploads%2f2016%2f12%2fBeautiful-Pic-Of-Good-Morning-Cat.jpg&ehk=TtUM1t%2bumFixVhMmHJcJsr5ebAb1v9j3JqJsAhtBVHE%3d&risl=&pid=ImgRaw&r=0" alt="cat">
+      </div>
+    <script type="text/javascript">
+    function displayClock(){
+      var now = new Date();
+      var dname = now.getDay(),
+          mo = now.getMonth(),
+          dnum = now.getDate(),
+          yr = now.getFullYear(),
+          hou = now.getHours(),
+          min = now.getMinutes(),
+          sec = now.getSeconds(),
+          pe = "AM";
+		  
+          if(hou >= 12){
+            pe = "PM";
+          }
+          if(hou == 0){
+            hou = 12;
+          }
+          if(hou > 12){
+            hou = hou - 12;
+          }
+
+          Number.prototype.pad = function(digits){
+            for(var n = this.toString(); n.length < digits; n = 0 + n);
+            return n;
+          }
+
+          var months = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "October", "November", "December"];
+          var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+          var ids = ["dayname", "month", "daynum", "year", "hour", "minutes", "seconds", "period"];
+          var values = [week[dname], months[mo], dnum.pad(2), yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+          for(var i = 0; i < ids.length; i++)
+          document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+    }
+  var imageClock = function() 
+  {
+  var time = new Date().getHours();
+  var image = "https://th.bing.com/th/id/R.558e3713ca9aa205c82281702c382819?rik=Qn89mEF%2fnAeaGQ&riu=http%3a%2f%2fwww.kittyworks.com%2fimages%2fd7eqvwrnn0d.jpg&ehk=EfxZ49LQJgp82G43T9kqFQfmxWDFV8QQJfb5NVhWn%2fE%3d&risl=&pid=ImgRaw&r=0";
+  var messageText = "cat clock";
+  var cat_to_edit = document.getElementById('edit_cat');
+    if (time >= 5 && time < 11){
+      image = "https://th.bing.com/th/id/R.2a40cff2a1381cba111d8d867b6e94d2?rik=pTdd8gRtcninmg&riu=http%3a%2f%2fwww.goodmorningwishes.org%2fwp-content%2fuploads%2f2016%2f12%2fGood-Morning-How-Are-You.jpg&ehk=RAFX4V%2bmY7RRnFTtBdE0tjG6yXFEZqdtqAsw44gwQ6M%3d&risl=&pid=ImgRaw&r=0";
+      messageText = "Good morning meow!";
+    }
+    else if (time >= 11 && time < 16){
+      image = "https://cdn.memegenerator.es/imagenes/memes/full/28/67/28673211.jpg";
+      messageText = "Good afternoon meow!";
+    }
+    else if(time >= 16 && time < 19){
+      image ="https://i.imgflip.com/23jai0.jpg";
+      messageText = "Good evening meow!";
+    }
+    else if (time >= 19 && time < 23){
+      image = "https://th.bing.com/th/id/OIP.f9sSddVRYTpCOTU1vznSzQHaE7?pid=ImgDet&rs=1";
+      messageText = "Good night meow!";
+    }
+    else if (time >= 1 && time < 5){
+      image = "https://i.pinimg.com/originals/b2/2e/b4/b22eb4a9872c3dc0e9341de7e036c91d.jpg";
+      messageText = "your still awake!";
+    }
+    console.log(messageText); 
+    edit_cat.src = image;
+  };
+  imageClock();
+  var oneSecond = 1000;
+  setInterval( imageClock, oneSecond);
+
+    function initClock(){
+      displayClock();
+      window.setInterval("displayClock()", 1);
+    }
+    </script>
+
+  </body>
+</html>
